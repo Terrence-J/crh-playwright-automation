@@ -1,0 +1,29 @@
+{
+  "name": "crh-playwright-framework",
+  "version": "1.0.0",
+  "description": "CRH Playwright TypeScript starter with page objects, fixtures, demo checks and evidence reports",
+  "scripts": {
+    "test": "playwright test --project=demo-chromium",
+    "test:headed": "playwright test --project=demo-chromium --headed",
+    "test:ui": "playwright test --project=demo-chromium --ui",
+    "test:debug": "playwright test --project=demo-chromium --debug",
+    "test:smoke": "playwright test --project=demo-chromium --grep @smoke",
+    "test:regression": "playwright test --project=demo-chromium --grep @regression",
+    "test:crh": "node scripts/run-crh.cjs",
+    "typecheck": "tsc --noEmit",
+    "report": "playwright show-report",
+    "install:browsers": "playwright install chromium",
+    "auth:save": "node scripts/save-session.cjs"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6",
+    "dotenv": "^18.0.10",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}
