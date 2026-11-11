@@ -11,7 +11,13 @@ const { chromium } = require('@playwright/test');
     await page.getByText('New Commercial Request', { exact: true }).click({ timeout: 60000 });
     const form = page.frameLocator('iframe[src*=sc-commercial-request]');
     await form.getByRole('radio', { name: /New Commercial Request/ }).click({ timeout: 60000 });
-    await form.getByLabel('Site(s)', { exact: true }).click();
+    for (let i = 0; i < 3; i++) {
+      await form.getByLabel('Site(s)', { exact: true }).click();
+      try {
+        await form.getByText('Amandelbult', { exact: true }).waitFor({ state: 'visible', timeout: 3000 });
+        break;
+      } catch { /* The wizard can consume the first click while it animates. */ }
+    }
     await form.getByText('Amandelbult', { exact: true }).click();
     await form.locator('div.sapMHBox').filter({ has: form.getByText('Dishaba', { exact: true }) }).getByRole('checkbox').click();
     await form.getByRole('button', { name: 'Done', exact: true }).click();
